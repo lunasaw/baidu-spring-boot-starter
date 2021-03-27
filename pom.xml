@@ -12,7 +12,6 @@
     <url>https://github.com/czy1024/luna-common</url>
     <properties>
         <maven.test.skip>true</maven.test.skip>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <java.version>1.8</java.version>
@@ -88,7 +87,6 @@
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-
 
     <scm>
         <url>https://github.com/czy1024/baidu-spring-boot-starter</url>
