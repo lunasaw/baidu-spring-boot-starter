@@ -7,7 +7,7 @@
     <groupId>com.github.czy1024</groupId>
     <artifactId>baidu-spring-boot-starter</artifactId>
     <name>luna-baidu-api</name>
-    <version>0.0.2</version>
+    <version>1.0.2</version>
     <description>Baidu API Toolkit</description>
     <url>https://github.com/czy1024/luna-common</url>
     <properties>
@@ -166,6 +166,7 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.9.1</version>
                         <configuration>
+                            <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
                             <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
                         <executions>
