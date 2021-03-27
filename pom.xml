@@ -7,7 +7,7 @@
     <groupId>com.github.czy1024</groupId>
     <artifactId>baidu-spring-boot-starter</artifactId>
     <name>baidu-spring-boot-starter</name>
-    <version>1.0.4</version>
+    <version>1.0.4-RELEASE</version>
     <description>Baidu API Toolkit</description>
     <url>https://github.com/czy1024/baidu-spring-boot-start</url>
     <properties>
