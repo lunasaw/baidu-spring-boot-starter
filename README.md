@@ -62,7 +62,7 @@ baidu-spring-boot-starter-baidu
     <dependency>
         <groupId>com.github.czy1024</groupId>
         <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.4-RELEASE</version>
     </dependency>
 ```
 在配置文件application.properties加入可选配置
@@ -79,28 +79,24 @@ luna:
     baiduKey: xxx
     jsKey: xxx
     projectId: xxx
-
-
-
-
 ```
 
 引用示例
 
 ```java
 
-若采用SpringBoot构建项目可通过将第三方包中的BaiduConfigValue,GetBaiduKey通过Spring配置文件注入Spring管理
+若采用SpringBoot构建项目可通过将第三方包中的BaiduProperties,BaiduKeyGenerate通过Spring配置文件注入Spring管理
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class BaiduApiTest {
     @Autowired
-    private GetBaiduKey        getBaiduKey;
+    private BaiduKeyGenerate baiduKeyGenerate;
 
     @Test
     public void atest() throws Exception {
         System.out.println(BaiduApiContent.BAIDU_KEY);
-        getBaiduKey.getAuth();
+        baiduKeyGenerate.getAuth();
     }
 }
 
