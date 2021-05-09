@@ -62,7 +62,7 @@ baidu-spring-boot-starter-baidu
     <dependency>
         <groupId>com.github.czy1024</groupId>
         <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-        <version>1.0.4-RELEASE</version>
+        <version>2.0.9-RELEASE</version>
     </dependency>
 ```
 在配置文件application.properties加入可选配置
@@ -110,7 +110,7 @@ public class BaiduApiTest {
 eg:
 
 ```
-│── src
+├── src
 │   ├── main
 │   │   ├── java
 │   │   │   └── com
@@ -125,6 +125,7 @@ eg:
 │   │   │               │   ├── BaiduGoodsIdentifyApi.java
 │   │   │               │   ├── BaiduOcrApi.java
 │   │   │               │   ├── BaiduTextApi.java
+│   │   │               │   ├── BaiduUserFaceApi.java
 │   │   │               │   ├── BaiduVoiceApi.java
 │   │   │               │   └── VoiceSDK.java
 │   │   │               ├── config
@@ -142,7 +143,11 @@ eg:
 │   │   │                   │   ├── FaceMatchResultDTO.java
 │   │   │                   │   ├── IdCardAllinfoDTO.java
 │   │   │                   │   ├── IdCardCheckResultDTO.java
-│   │   │                   │   └── IdCardInfoDTO.java
+│   │   │                   │   ├── IdCardInfoDTO.java
+│   │   │                   │   ├── UserFaceListResultDTO.java
+│   │   │                   │   ├── UserFaceResultDTO.java
+│   │   │                   │   ├── UserInfoListDTO.java
+│   │   │                   │   └── UserInfoResultDTO.java
 │   │   │                   ├── goods
 │   │   │                   │   ├── BaiKeInfoDTO.java
 │   │   │                   │   └── GoodsInfoDTO.java
@@ -172,11 +177,8 @@ eg:
 │   │       ├── META-INF
 │   │       │   └── spring.factories
 │   │       ├── application-pro.yml
-│   │       ├── application.properties
 │   │       └── log
 │   │           └── logback.xml
-│   └── test
-│       └── java
 
 
 ```
