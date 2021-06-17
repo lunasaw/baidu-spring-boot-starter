@@ -1,6 +1,5 @@
 package com.luna.baidu.dto.face;
 
-
 import com.luna.baidu.dto.location.LocationDO;
 
 /**
@@ -15,7 +14,7 @@ public class IdCardCheckResultDTO {
     /**
      * 身份证信息
      */
-    private IdCardAllinfoDTO wordsResult;
+    private IdCardAllInfoDTO wordsResult;
 
     /**
      * 头像位置base64编码
@@ -25,7 +24,7 @@ public class IdCardCheckResultDTO {
     /**
      * 头像位置
      */
-    private LocationDO photoLocationDO;
+    private LocationDO       photoLocationDO;
 
     /**
      * 身份证类型
@@ -54,11 +53,11 @@ public class IdCardCheckResultDTO {
      */
     private String           idcardNumberType;
 
-    public IdCardAllinfoDTO getWordsResult() {
+    public IdCardAllInfoDTO getWordsResult() {
         return wordsResult;
     }
 
-    public void setWordsResult(IdCardAllinfoDTO wordsResult) {
+    public void setWordsResult(IdCardAllInfoDTO wordsResult) {
         this.wordsResult = wordsResult;
     }
 

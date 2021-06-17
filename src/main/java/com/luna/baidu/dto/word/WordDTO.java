@@ -11,7 +11,7 @@ import com.luna.baidu.dto.location.LocationDO;
  */
 public class WordDTO {
 
-    private String   words;
+    private String     words;
 
     private LocationDO locationDO;
 

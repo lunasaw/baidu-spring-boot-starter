@@ -6,12 +6,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 
-import com.luna.baidu.dto.word.WordDTO;
-import com.luna.common.file.FileUtils;
-import com.luna.common.net.HttpUtils;
-import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.Base64Util;
-import com.luna.common.text.CharsetKit;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +13,12 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.luna.baidu.dto.word.WordDTO;
+import com.luna.common.file.FileTools;
+import com.luna.common.net.HttpUtils;
+import com.luna.common.net.HttpUtilsConstant;
+import com.luna.common.text.Base64Util;
+import com.luna.common.text.CharsetKit;
 
 /**
  * @author Luna@win10
@@ -48,20 +48,21 @@ public class BaiduOcrApi {
      * - RUS：俄语
      * @return
      */
-    public static List<WordDTO> baiDuOcr(String key, String image, String languageType) throws UnsupportedEncodingException {
+    public static List<WordDTO> baiDuOcr(String key, String image, String languageType)
+        throws UnsupportedEncodingException {
         HashMap<String, Object> map = Maps.newHashMap();
         if (HttpUtils.isNetUrl(image)) {
             map.put("url", image);
         } else if (Base64Util.isBase64(image)) {
             map.put("image", image);
         } else {
-            map.put("image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            map.put("image", Base64Util.encodeBase64(FileTools.read(image)));
         }
 
         map.put("language_type", languageType);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", key), HttpUtils.urlencode(map));
+            ImmutableMap.of("access_token", key), HttpUtils.urlEncode(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         return JSON.parseArray(JSON.parseObject(s).get("words_result").toString(), WordDTO.class);
     }
@@ -84,6 +85,7 @@ public class BaiduOcrApi {
 
     /**
      * 字符串判断操作
+     * 
      * @param image
      * @return
      * @throws UnsupportedEncodingException
@@ -95,7 +97,7 @@ public class BaiduOcrApi {
             image = "image=" + URLEncoder.encode(image, CharsetKit.UTF_8);
         } else {
             image = "image="
-                + URLEncoder.encode(Base64Util.encodeBase64(FileUtils.readFileToBytes(image)), CharsetKit.UTF_8);
+                + URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetKit.UTF_8);
         }
         return image;
     }

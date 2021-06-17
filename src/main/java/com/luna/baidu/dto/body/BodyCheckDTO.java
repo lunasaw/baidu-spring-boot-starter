@@ -1,6 +1,5 @@
 package com.luna.baidu.dto.body;
 
-
 import com.luna.baidu.dto.location.LocationDO;
 
 /**
@@ -14,7 +13,7 @@ public class BodyCheckDTO {
 
     private BodyAttributesDTO attributes;
 
-    private LocationDO locationDO;
+    private LocationDO        locationDO;
 
     public BodyAttributesDTO getAttributes() {
         return attributes;

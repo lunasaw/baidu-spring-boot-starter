@@ -1,4 +1,5 @@
 package com.luna.baidu.config;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @createTime 2021年03月27日 12:58:00
  */
 @Configuration
-@ConditionalOnProperty(prefix = "luna.baidu", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "luna.baidu", name = "appId")
 @EnableConfigurationProperties(BaiduProperties.class)
 public class BaiduAutoConfiguration {
 
@@ -26,7 +27,7 @@ public class BaiduAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public BaiduKeyGenerate getBaiduKey(){
+    public BaiduKeyGenerate getBaiduKey() {
         return new BaiduKeyGenerate(baiduProperties);
     }
 }

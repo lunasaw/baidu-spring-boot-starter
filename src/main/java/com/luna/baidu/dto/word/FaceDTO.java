@@ -11,7 +11,7 @@ import com.luna.baidu.dto.location.LocationDO;
  */
 public class FaceDTO {
 
-    private String   faceToken;
+    private String     faceToken;
 
     private LocationDO locationDO;
 

@@ -3,8 +3,6 @@ package com.luna.baidu.api;
 import java.io.IOException;
 import java.util.List;
 
-import com.luna.common.net.HttpUtils;
-import com.luna.common.net.HttpUtilsConstant;
 import org.apache.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
@@ -13,7 +11,8 @@ import com.google.common.collect.ImmutableMap;
 import com.luna.baidu.dto.write.EventContextDTO;
 import com.luna.baidu.dto.write.HotEventDTO;
 import com.luna.baidu.dto.write.WriterResultCheckDTO;
-
+import com.luna.common.net.HttpUtils;
+import com.luna.common.net.HttpUtilsConstant;
 
 /**
  * @author Luna@win10

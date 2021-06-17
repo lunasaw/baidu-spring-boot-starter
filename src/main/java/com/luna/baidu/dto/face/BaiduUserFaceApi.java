@@ -1,4 +1,4 @@
-package com.luna.baidu.api;
+package com.luna.baidu.dto.face;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.luna.baidu.dto.face.UserFaceListResultDTO;
-import com.luna.baidu.dto.face.UserFaceResultDTO;
-import com.luna.baidu.dto.face.UserInfoListDTO;
+import com.luna.baidu.api.BaiduApiConstant;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 
@@ -175,9 +173,15 @@ public class BaiduUserFaceApi {
      */
     public static Boolean faceUserDelete(String key, String groupId, String userId, String faceToken) {
         log.info("faceUserDelete start");
+
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("face_token", faceToken);
+        map.put("group_id", groupId);
+        map.put("user_id", userId);
+
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_DELETE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(ImmutableMap.of("face_token", faceToken, "group_id", groupId, "user_id", userId)));
+            JSON.toJSONString(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
         log.info("faceUserDelete success error_code={}", errorCode);
@@ -193,12 +197,18 @@ public class BaiduUserFaceApi {
      */
     public static UserInfoListDTO getUserInfo(String key, String userId, String groupId) {
         log.info("getUserInfo start");
-        if (StringUtils.isEmpty(groupId)) {
-            groupId = "@ALL";
+
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("user_id", userId);
+        if (StringUtils.isNotEmpty(groupId)) {
+            map.put("group_id", groupId);
+        } else {
+            map.put("group_id", "@ALL");
         }
+
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_INFO,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(ImmutableMap.of("user_id", userId, "groupId", groupId)));
+            JSON.toJSONString(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserInfoListDTO userInfoListDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
@@ -215,9 +225,14 @@ public class BaiduUserFaceApi {
      */
     public static UserFaceListResultDTO userFaceList(String key, String userId, String groupId) {
         log.info("userFaceList start");
+
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("user_id", userId);
+        map.put("group_id", groupId);
+
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_LIST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
+            JSON.toJSONString(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceListResultDTO userFaceListResultDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceListResultDTO.class);
@@ -234,9 +249,14 @@ public class BaiduUserFaceApi {
      */
     public static Boolean deleteUser(String key, String userId, String groupId) {
         log.info("deleteUser start");
+
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("user_id", userId);
+        map.put("group_id", groupId);
+
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_DELETE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
+            JSON.toJSONString(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         System.out.println(s);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
@@ -401,7 +421,7 @@ public class BaiduUserFaceApi {
         System.out.println(s);
         UserInfoListDTO userFaceResultDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
-        log.info("userFaceSearch success userFaceResultDTO={}", JSON.toJSONString(userFaceResultDTO));
+        log.info("userFaceSearch success userFaceResultDTO={}", userFaceResultDTO);
         return userFaceResultDTO;
     }
 

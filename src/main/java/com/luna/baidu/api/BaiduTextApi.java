@@ -3,9 +3,6 @@ package com.luna.baidu.api;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.luna.common.net.HttpUtils;
-import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.CharsetKit;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -17,7 +14,9 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.luna.baidu.dto.text.TextSimilarResultDTO;
 import com.luna.baidu.dto.text.TextSimnetResultDTO;
-
+import com.luna.common.net.HttpUtils;
+import com.luna.common.net.HttpUtilsConstant;
+import com.luna.common.text.CharsetKit;
 
 /**
  * @author Luna@win10

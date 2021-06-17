@@ -60,18 +60,17 @@ baidu-spring-boot-starter-baidu
 ```xml
 
     <dependency>
-        <groupId>com.github.czy1024</groupId>
+        <groupId>io.github.lunasaw</groupId>
         <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-        <version>2.0.9-RELEASE</version>
+        <version>2.2.3-RELEASE</version>
     </dependency>
 ```
-在配置文件application.properties加入可选配置
+在配置文件 application.yml 加入可选配置
 
 ```text
        # 百度API
 luna:
   baidu:
-    enable: true
     // 生成地址https://console.bce.baidu.com/
     appId: xxx
     appKey: xxxx
@@ -95,7 +94,6 @@ public class BaiduApiTest {
 
     @Test
     public void atest() throws Exception {
-        System.out.println(BaiduApiContent.BAIDU_KEY);
         baiduKeyGenerate.getAuth();
     }
 }
@@ -110,6 +108,10 @@ public class BaiduApiTest {
 eg:
 
 ```
+├── LICENSE
+├── README.md
+├── baidu-spring-boot-starter.iml
+├── pom.xml
 ├── src
 │   ├── main
 │   │   ├── java
@@ -117,7 +119,7 @@ eg:
 │   │   │       └── luna
 │   │   │           └── baidu
 │   │   │               ├── api
-│   │   │               │   ├── BaiduAddress.java
+│   │   │               │   ├── BaiduAddressApi.java
 │   │   │               │   ├── BaiduApiConstant.java
 │   │   │               │   ├── BaiduBodyApi.java
 │   │   │               │   ├── BaiduCreationApi.java
@@ -126,59 +128,77 @@ eg:
 │   │   │               │   ├── BaiduOcrApi.java
 │   │   │               │   ├── BaiduTextApi.java
 │   │   │               │   ├── BaiduUserFaceApi.java
-│   │   │               │   ├── BaiduVoiceApi.java
-│   │   │               │   └── VoiceSDK.java
+│   │   │               │   └── BaiduVoiceApi.java
 │   │   │               ├── config
 │   │   │               │   ├── BaiduAutoConfiguration.java
 │   │   │               │   ├── BaiduKeyGenerate.java
 │   │   │               │   └── BaiduProperties.java
-│   │   │               └── dto
-│   │   │                   ├── body
-│   │   │                   │   ├── BodyAttributesDTO.java
-│   │   │                   │   ├── BodyCheckDTO.java
-│   │   │                   │   └── BodyScoreNameDTO.java
-│   │   │                   ├── face
-│   │   │                   │   ├── FaceCheckResultDTO.java
-│   │   │                   │   ├── FaceLiveResultDTO.java
-│   │   │                   │   ├── FaceMatchResultDTO.java
-│   │   │                   │   ├── IdCardAllinfoDTO.java
-│   │   │                   │   ├── IdCardCheckResultDTO.java
-│   │   │                   │   ├── IdCardInfoDTO.java
-│   │   │                   │   ├── UserFaceListResultDTO.java
-│   │   │                   │   ├── UserFaceResultDTO.java
-│   │   │                   │   ├── UserInfoListDTO.java
-│   │   │                   │   └── UserInfoResultDTO.java
-│   │   │                   ├── goods
-│   │   │                   │   ├── BaiKeInfoDTO.java
-│   │   │                   │   └── GoodsInfoDTO.java
-│   │   │                   ├── location
-│   │   │                   │   └── LocationDO.java
-│   │   │                   ├── text
-│   │   │                   │   ├── TextSimilarDTO.java
-│   │   │                   │   ├── TextSimilarResultDTO.java
-│   │   │                   │   ├── TextSimilarityDTO.java
-│   │   │                   │   └── TextSimnetResultDTO.java
-│   │   │                   ├── voice
-│   │   │                   │   ├── VoiceCheckDTO.java
-│   │   │                   │   └── VoiceSynthesisDTO.java
-│   │   │                   ├── word
-│   │   │                   │   ├── BodyDTO.java
-│   │   │                   │   ├── FaceDTO.java
-│   │   │                   │   └── WordDTO.java
-│   │   │                   └── write
-│   │   │                       ├── CompositionDTO.java
-│   │   │                       ├── EventContextDTO.java
-│   │   │                       ├── EventKeyDTO.java
-│   │   │                       ├── HotEventContentDTO.java
-│   │   │                       ├── HotEventDTO.java
-│   │   │                       ├── VeinDTO.java
-│   │   │                       └── WriterResultCheckDTO.java
+│   │   │               ├── dto
+│   │   │               │   ├── body
+│   │   │               │   │   ├── BodyAttributesDTO.java
+│   │   │               │   │   ├── BodyCheckDTO.java
+│   │   │               │   │   └── BodyScoreNameDTO.java
+│   │   │               │   ├── face
+│   │   │               │   │   ├── BaiduUserFaceApi.java
+│   │   │               │   │   ├── FaceCheckResultDTO.java
+│   │   │               │   │   ├── FaceLiveResultDTO.java
+│   │   │               │   │   ├── FaceMatchResultDTO.java
+│   │   │               │   │   ├── FaceResultDTO.java
+│   │   │               │   │   ├── IdCardAllInfoDTO.java
+│   │   │               │   │   ├── IdCardCheckResultDTO.java
+│   │   │               │   │   ├── IdCardInfoDTO.java
+│   │   │               │   │   ├── UserFaceListResultDTO.java
+│   │   │               │   │   ├── UserFaceResultDTO.java
+│   │   │               │   │   ├── UserInfoListDTO.java
+│   │   │               │   │   └── UserInfoResultDTO.java
+│   │   │               │   ├── goods
+│   │   │               │   │   ├── BaiKeInfoDTO.java
+│   │   │               │   │   └── GoodsInfoDTO.java
+│   │   │               │   ├── location
+│   │   │               │   │   └── LocationDO.java
+│   │   │               │   ├── map
+│   │   │               │   │   ├── ip2address
+│   │   │               │   │   │   ├── AddressContentDTO.java
+│   │   │               │   │   │   ├── AddressDetailDTO.java
+│   │   │               │   │   │   ├── AddressResultDTO.java
+│   │   │               │   │   │   └── LocationDTO.java
+│   │   │               │   │   └── weather
+│   │   │               │   │       ├── WeatherForecastDTO.java
+│   │   │               │   │       ├── WeatherLocationDTO.java
+│   │   │               │   │       ├── WeatherNowDTO.java
+│   │   │               │   │       └── WeatherResultDTO.java
+│   │   │               │   ├── text
+│   │   │               │   │   ├── TextSimilarDTO.java
+│   │   │               │   │   ├── TextSimilarResultDTO.java
+│   │   │               │   │   ├── TextSimilarityDTO.java
+│   │   │               │   │   └── TextSimnetResultDTO.java
+│   │   │               │   ├── voice
+│   │   │               │   │   └── VoiceWriteResultDTO.java
+│   │   │               │   ├── word
+│   │   │               │   │   ├── BodyDTO.java
+│   │   │               │   │   ├── FaceDTO.java
+│   │   │               │   │   └── WordDTO.java
+│   │   │               │   └── write
+│   │   │               │       ├── CompositionDTO.java
+│   │   │               │       ├── EventContextDTO.java
+│   │   │               │       ├── EventKeyDTO.java
+│   │   │               │       ├── HotEventContentDTO.java
+│   │   │               │       ├── HotEventDTO.java
+│   │   │               │       ├── VeinDTO.java
+│   │   │               │       └── WriterResultCheckDTO.java
+│   │   │               └── req
+│   │   │                   ├── VoiceCheckReq.java
+│   │   │                   ├── VoiceSynthesisReq.java
+│   │   │                   └── face
+│   │   │                       └── FaceLiveReq.java
 │   │   └── resources
 │   │       ├── META-INF
 │   │       │   └── spring.factories
 │   │       ├── application-pro.yml
 │   │       └── log
 │   │           └── logback.xml
+│   └── test
+│       └── java
 
 
 ```
