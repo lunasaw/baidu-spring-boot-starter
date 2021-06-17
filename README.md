@@ -2,7 +2,7 @@
 
 # baidu-spring-boot-starter
 
-baidu-spring-boot-starter-baidu
+[baidu-spring-boot-starter-baidu](https://github.com/lunasaw/baidu-spring-boot-starter)
 
 <!-- PROJECT SHIELDS -->
 
@@ -18,7 +18,7 @@ baidu-spring-boot-starter-baidu
 
 <p align="center">
   <a href="https://github.com/czy1024/baidu-spring-boot-starter/">
-    <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
+    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grloxhfbmkj30f00760sv.jpg" alt="Logo" width="540" height="258">
   </a>
 
   <h3 align="center">百度开放平台工具</h3>
@@ -38,6 +38,10 @@ baidu-spring-boot-starter-baidu
 </p>
 
 ## 日志
+ 增加人员组人脸识别相关接口
+
+ 增加语音识别合成相关接口
+
  增加百度人脸识别,卡证审核等Api请求封装
 
  增加百度OcrApi接口
@@ -100,8 +104,8 @@ public class BaiduApiTest {
 
 
 ```
-
-[结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
+结果即刻得到配置数据,进而调用api里的静态方法完成调用
+[文档链接](https://lunasaw.github.io/baidu-spring-boot-starter/)
 
 
 ### 文件目录说明
