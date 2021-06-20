@@ -2,8 +2,10 @@ package com.luna.baidu.api;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import com.luna.baidu.constant.ImageConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -28,7 +30,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 人脸注册Api 返回face_token
-     * 
+     *
      * @param key
      * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断。
      * 注：组内每个uid下的人脸图片数目上限为20张
@@ -84,16 +86,16 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_ADD,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceResultDTO userFaceResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceResultDTO.class);
-        log.info("faceUserAdd success userFaceResultDTO={}", userFaceResultDTO);
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserFaceResultDTO.class);
+        log.info("faceUserAdd success userFaceResultDTO={}, response={}", userFaceResultDTO, response);
         return userFaceResultDTO;
     }
 
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
         String userId) {
-        return faceUserAdd(key, image, imageType, groupId, userId, "", "NONE", "NONE", "APPEND", 0);
+        return faceUserAdd(key, image, imageType, groupId, userId, StringUtils.EMPTY, "NONE", "NONE", "APPEND", 0);
     }
 
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
@@ -103,7 +105,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 更新人脸接口
-     * 
+     *
      * @param key
      * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断
      * @param imageType 图片类型
@@ -151,10 +153,11 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_UPDATE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceResultDTO userFaceResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceResultDTO.class);
-        log.info("faceUserUpdate success userFaceResultDTO={}", JSON.toJSONString(userFaceResultDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserFaceResultDTO.class);
+        log.info("faceUserUpdate success userFaceResultDTO={}, response={}", JSON.toJSONString(userFaceResultDTO),
+            response);
         return userFaceResultDTO;
 
     }
@@ -166,7 +169,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 删除人脸
-     * 
+     *
      * @param key
      * @param groupId
      * @param userId
@@ -178,8 +181,8 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_DELETE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("face_token", faceToken, "group_id", groupId, "user_id", userId)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        Integer errorCode = JSON.parseObject(response).getInteger("error_code");
         log.info("faceUserDelete success error_code={}", errorCode);
         return errorCode == 0;
     }
@@ -199,16 +202,17 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_INFO,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("user_id", userId, "groupId", groupId)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserInfoListDTO userInfoListDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
-        log.info("faceUserDelete success userInfoListDTO={}", JSON.toJSONString(userInfoListDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserInfoListDTO.class);
+        log.info("faceUserDelete success userInfoListDTO={}, response={}", JSON.toJSONString(userInfoListDTO),
+            response);
         return userInfoListDTO;
     }
 
     /**
      * 获取用户人脸列表
-     * 
+     *
      * @param key
      * @param userId
      * @param groupId
@@ -218,10 +222,11 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_LIST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceListResultDTO userFaceListResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceListResultDTO.class);
-        log.info("faceUserDelete success userInfoListDTO={}", JSON.toJSONString(userFaceListResultDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserFaceListResultDTO.class);
+        log.info("faceUserDelete success userInfoListDTO={}, response={}", JSON.toJSONString(userFaceListResultDTO),
+            response);
         return userFaceListResultDTO;
     }
 
@@ -238,14 +243,12 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("userCopy success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
      * 复制用户
-     * 
+     *
      * @param key
      * @param userId 用户id，长度限制48B
      * @param srcGroupId 从指定组里复制信息
@@ -261,14 +264,12 @@ public class BaiduUserFaceApi {
             JSON.toJSONString(
                 ImmutableMap.of("user_id", userId, "src_group_id", srcGroupId, "dst_group_id", dstGroupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("userCopy success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
      * 查询用户组
-     * 
+     *
      * @param key
      * @param start 默认值0，起始序号
      * @param length 返回数量，默认值100，最大值1000
@@ -280,10 +281,10 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_GROUP_LIST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("start", start, "length", length)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         List<String> groupIdList = JSON.parseArray(
-            JSON.parseObject(JSON.parseObject(s).getString("result")).getString("group_id_list"), String.class);
-        log.info("getUserGroup success groupIdList={}", groupIdList);
+            JSON.parseObject(JSON.parseObject(response).getString("result")).getString("group_id_list"), String.class);
+        log.info("getUserGroup success groupIdList={}, response={}", groupIdList, response);
         return groupIdList;
     }
 
@@ -301,9 +302,7 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("createUserGroup success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
@@ -319,15 +318,13 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("deleteUserGroup success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
      *
      * 人脸搜索
-     * 
+     *
      * @param key
      * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断
      * @param imageType 图片类型
@@ -360,26 +357,26 @@ public class BaiduUserFaceApi {
         String qualityControl, String liveNessControl, String userId, Integer maxUserNum, Integer faceSortType) {
         log.info("userFaceSearch start");
 
-        HashMap<String, Object> map = Maps.newHashMap();
-
-        ImmutableMap.<String, Object>builder()
-            .put("image", image)
-            .put("image_type", imageType)
-            .put("group_id_list", groupIdList)
-            .put("quality_control", qualityControl)
-            .put("liveness_control", liveNessControl)
-            .put("user_id", userId)
-            .put("max_user_num", maxUserNum)
-            .put("face_sort_type", faceSortType)
-            .build();
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("image", image);
+        map.put("image_type", imageType);
+        map.put("group_id_list", groupIdList);
+        map.put("quality_control", qualityControl);
+        map.put("liveness_control", liveNessControl);
+        if (StringUtils.isNotBlank(userId)) {
+            map.put("user_id", userId);
+        }
+        map.put("max_user_num", maxUserNum);
+        map.put("face_sort_type", faceSortType);
 
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.SEARCH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserInfoListDTO userFaceResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
-        log.info("userFaceSearch success userFaceResultDTO={}", JSON.toJSONString(userFaceResultDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserInfoListDTO.class);
+        log.info("userFaceSearch success userFaceResultDTO={}, response={}", JSON.toJSONString(userFaceResultDTO),
+            response);
         return userFaceResultDTO;
     }
 
@@ -390,5 +387,23 @@ public class BaiduUserFaceApi {
     public static UserInfoListDTO userFaceSearch(String key, String image, String imageType, Integer maxUserNum,
         String groupIdList) {
         return userFaceSearch(key, image, imageType, groupIdList, "NONE", "NONE", StringUtils.EMPTY, maxUserNum, 0);
+    }
+
+    public static UserInfoListDTO userFaceSearchWithBase64(String key, String image, Integer maxUserNum,
+        String groupIdList) {
+        return userFaceSearch(key, image, ImageConstant.IMAGE_BASE.getImageStr(), groupIdList, "NONE", "NONE",
+            StringUtils.EMPTY, maxUserNum, 0);
+    }
+
+    public static UserInfoListDTO userFaceSearchWithUrl(String key, String image, Integer maxUserNum,
+        String groupIdList) {
+        return userFaceSearch(key, image, ImageConstant.IMAGE_URL.getImageStr(), groupIdList, "NONE", "NONE",
+            StringUtils.EMPTY, maxUserNum, 0);
+    }
+
+    public static UserInfoListDTO userFaceSearchWithFaceToken(String key, String image, Integer maxUserNum,
+        String groupIdList) {
+        return userFaceSearch(key, image, ImageConstant.FACE_TOKEN.getImageStr(), groupIdList, "NONE", "NONE",
+            StringUtils.EMPTY, maxUserNum, 0);
     }
 }
