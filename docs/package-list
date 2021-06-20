@@ -1,5 +1,6 @@
 com.luna.baidu.api
 com.luna.baidu.config
+com.luna.baidu.constant
 com.luna.baidu.dto.body
 com.luna.baidu.dto.face
 com.luna.baidu.dto.goods
