@@ -21,7 +21,8 @@ public class BaiduProperties {
 
     private String          projectId;
 
-    private String mapKey;
+    private String          mapKey;
+
 
     public String getMapKey() {
         return mapKey;

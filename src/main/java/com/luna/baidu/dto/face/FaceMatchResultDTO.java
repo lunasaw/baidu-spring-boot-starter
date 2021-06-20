@@ -1,8 +1,8 @@
 package com.luna.baidu.dto.face;
 
-import java.util.List;
-
 import com.luna.baidu.dto.word.FaceDTO;
+
+import java.util.List;
 
 /**
  * @Package: com.luna.baidu.dto.face

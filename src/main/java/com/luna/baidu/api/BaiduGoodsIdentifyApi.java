@@ -4,6 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.luna.common.file.FileTools;
+import com.luna.common.net.HttpUtils;
+import com.luna.common.net.HttpUtilsConstant;
+import com.luna.common.text.Base64Util;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +16,6 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.luna.baidu.dto.goods.GoodsInfoDTO;
-import com.luna.common.file.FileTools;
-import com.luna.common.net.HttpUtils;
-import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.Base64Util;
 
 /**
  * @author Luna@win10
@@ -32,10 +32,9 @@ public class BaiduGoodsIdentifyApi {
      * @param image
      * @param baikeNum 联系百度百科条目结果数
      * @return
-     * @throws UnsupportedEncodingException
      */
     public static List<GoodsInfoDTO> goodsIdentify(String key, String image, Integer baikeNum)
-        throws UnsupportedEncodingException {
+    {
         log.info("goodsIdentify start");
         HashMap<String, Object> params = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {

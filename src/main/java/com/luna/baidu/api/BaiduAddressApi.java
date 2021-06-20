@@ -2,6 +2,7 @@ package com.luna.baidu.api;
 
 import java.util.HashMap;
 
+import com.luna.common.net.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 
@@ -10,7 +11,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.luna.baidu.dto.map.ip2address.AddressResultDTO;
 import com.luna.baidu.dto.map.weather.WeatherResultDTO;
-import com.luna.common.net.HttpUtils;
 
 /**
  * @author Luna@win10
