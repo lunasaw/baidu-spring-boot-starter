@@ -1,23 +1,28 @@
 package com.luna.baidu.api;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.Lists;
-import com.luna.baidu.constant.ImageConstant;
-import com.luna.baidu.dto.face.*;
-import com.luna.baidu.req.face.FaceLiveReq;
-import com.luna.common.file.FileTools;
-import com.luna.common.net.HttpUtils;
-import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.Base64Util;
+import com.luna.common.constant.ImageConstant;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+import com.luna.baidu.dto.face.FaceCheckResultDTO;
+import com.luna.baidu.dto.face.FaceLiveResultDTO;
+import com.luna.baidu.dto.face.FaceMatchResultDTO;
+import com.luna.baidu.dto.face.IdCardCheckResultDTO;
+import com.luna.baidu.req.face.FaceLiveReq;
+import com.luna.common.file.FileTools;
+import com.luna.common.net.HttpUtils;
+import com.luna.common.net.HttpUtilsConstant;
+import com.luna.common.text.Base64Util;
 
 /**
  * @author Luna@win10
@@ -72,7 +77,7 @@ public class BaiduFaceApi {
     public static FaceMatchResultDTO faceMatch(String key, String live1, String imageType1, String faceType1,
         String live2,
         String imageType2, String faceType2) {
-        log.info("faceMatch start");
+        log.info("faceMatch::key = {}, live1 = {}, imageType1 = {}, faceType1 = {}, live2 = {}, imageType2 = {}, faceType2 = {}", key, live1, imageType1, faceType1, live2, imageType2, faceType2);
 
         ImmutableMap<String, String> face1 =
             ImmutableMap.of("image", live1, "image_type", imageType1, "face_type", faceType1);
