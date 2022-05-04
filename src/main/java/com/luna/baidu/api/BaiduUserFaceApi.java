@@ -69,7 +69,6 @@ public class BaiduUserFaceApi {
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
         String userId,
         String userInfo, String qualityControl, String liveNessControl, String actionType, Integer faceSortType) {
-        log.info("faceUserAdd start");
 
         ImmutableMap<String, Object> map = ImmutableMap.<String, Object>builder()
             .put("image", image)
