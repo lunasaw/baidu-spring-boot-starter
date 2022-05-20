@@ -11,7 +11,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
 import com.luna.baidu.dto.face.*;
-import com.luna.baidu.dto.word.FaceDTO;
+import com.luna.baidu.dto.face.facecheck.FaceCheckResultDTO;
+import com.luna.baidu.dto.face.facecheck.FaceDetailDTO;
 import com.luna.baidu.enums.FaceLiveControlEnum;
 import com.luna.baidu.enums.FaceTypeEnum;
 import com.luna.common.constant.Constant;
@@ -283,7 +284,17 @@ public class BaiduFaceApi {
 
     /**
      * 活体检测
-     * 
+     * image	是	string	图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断；
+     * 可以上传同一个用户的1张、3张或8张图片来进行活体判断
+     * 注：
+     * (1)后端会选择每组照片中的最高分数作为整体分数。 图片通过json格式上传，格式参考表格下方示例
+     * (2)支持1、3、8张图片输入进行计算，请求格式为数组格式
+     * image_type	是	string	图片类型
+     * BASE64:图片的base64值，base64编码后的图片数据，需urlencode，编码后的图片大小不超过2M；
+     * URL:图片的 URL地址( 可能由于网络等原因导致下载图片时间过长)；
+     * FACE_TOKEN: 人脸图片的唯一标识，调用人脸检测接口时，会为每个人脸图片赋予一个唯一的FACE_TOKEN，同一张图片多次检测得到的FACE_TOKEN是同一个。
+     * face_field	否	string	包括age,beauty,expression,face_shape,gender,glasses,landmark,quality,face_type,spoofing信息，逗号分隔，默认只返回face_token、活体数、人脸框、概率和旋转角度
+     * option	否	string	场景信息，程序会视不同的场景选用相对应的模型。当前支持的场景有COMMON(通用场景)，GATE(闸机场景)，默认使用COMMON
      * @param key
      * @param faceField
      * @return
