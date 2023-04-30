@@ -4,6 +4,8 @@
 
 [baidu-spring-boot-starter-baidu](https://github.com/lunasaw/baidu-spring-boot-starter)
 
+[项目新地址](https://github.com/lunasaw/luna-fans-api/tree/master/baidu-spring-boot-starter)
+
 <!-- PROJECT SHIELDS -->
 
 [![Contributors][contributors-shield]][contributors-url]
